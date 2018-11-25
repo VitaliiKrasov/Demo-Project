@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 public class OrchardTest {
     @DataProvider(name = "dataOrchard")
     public static Object[][] createData() {
-        return new Object[][] {{"Avocado", new Fruit("Avocado", Color.green)},
-                {"Grapefruit", new Citrus("Grapefruit", Color.red, 31.2)},
-                {"Lemon", new Citrus("Lemon", Color.red, 53)}};
+        return new Object[][] {{"Avocado", new Fruit("Avocado", Color.GREEN)},
+                {"Grapefruit", new Citrus("Grapefruit", Color.RED, 31.2)},
+                {"Lemon", new Citrus("Lemon", Color.RED, 53)}};
     }
 
     @Test(dataProvider = "dataOrchard")

@@ -14,10 +14,11 @@ public class ToolsTest {
     @BeforeMethod
     static List getTestList() {
         List<Fruit> fruits = new LinkedList<Fruit>();
-        fruits.add(new Fruit("Apple", Color.yellow));
-        fruits.add(new Fruit("Apple", Color.red));
-        fruits.add(new Citrus("Lemon", Color.yellow, 20));
-        fruits.add(new Citrus("Lime", Color.green, 15));
+        fruits.add(new Citrus("Lime", Color.GREEN, 15));
+        fruits.add(new Fruit("Apple", Color.YELLOW));
+        fruits.add(new Fruit("Apple", Color.RED));
+        fruits.add(new Citrus("Lemon", Color.YELLOW, 20));
+        fruits.add(new Fruit("Bananas", Color.BROWN));
         return fruits;
     }
 
@@ -27,10 +28,10 @@ public class ToolsTest {
         List fruits = getTestList();
 
         List<Fruit> expected = new LinkedList<Fruit>();
-        expected.add(new Fruit("Apple", Color.yellow));
-        expected.add(new Citrus("Lemon", Color.yellow, 20));
+        expected.add(new Fruit("Apple", Color.YELLOW));
+        expected.add(new Citrus("Lemon", Color.YELLOW, 20));
 //        act
-        List<Fruit> actual = getByColor(fruits, Color.yellow);
+        List<Fruit> actual = getByColor(fruits, Color.YELLOW);
 //        assert
         assertEquals(actual, expected);
     }
@@ -40,10 +41,11 @@ public class ToolsTest {
         List<Fruit> fruits = getTestList();
 
         List<Fruit> expected = new LinkedList<Fruit>();
-        expected.add(new Fruit("Apple", Color.yellow));
-        expected.add(new Fruit("Apple", Color.red));
-        expected.add(new Citrus("Lemon", Color.yellow, 20));
-        expected.add(new Citrus("Lime", Color.green, 15));
+        expected.add(new Fruit("Apple", Color.YELLOW));
+        expected.add(new Fruit("Apple", Color.RED));
+        expected.add(new Fruit("Bananas", Color.BROWN));
+        expected.add(new Citrus("Lemon", Color.YELLOW, 20));
+        expected.add(new Citrus("Lime", Color.GREEN, 15));
 //        act
         sortByName(fruits);
 //        assert

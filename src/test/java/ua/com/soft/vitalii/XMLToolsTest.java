@@ -29,10 +29,11 @@ public class XMLToolsTest {
     public void testSaveAndRead() {
 //        arrange
         List<Fruit> expected = new LinkedList<Fruit>();
-        expected.add(new Fruit("Bananas", Color.yellow));
-        expected.add(new Citrus("Lemon", Color.yellow, 45.0));
-        expected.add(new Citrus("Lime", Color.green, 35.1));
-        expected.add(new Citrus("Grapefruit", Color.red, 50));
+        expected.add(new Fruit("Bananas", Color.YELLOW));
+        expected.add(new Citrus("Lemon", Color.YELLOW, 45.0));
+        expected.add(new Citrus("Lime", Color.GREEN, 35.1));
+        expected.add(new Citrus("Grapefruit", Color.RED, 50));
+        expected.add(new Citrus("Orange", Color.ORANGE, 48.9));
 //        act
         try {
             XMLTools.save(expected);

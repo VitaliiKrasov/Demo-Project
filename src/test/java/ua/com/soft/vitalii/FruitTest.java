@@ -12,8 +12,8 @@ import static org.testng.Assert.assertEquals;
 public class FruitTest {
     @DataProvider(name = "dataFruits")
     public static Object[][] createData() {
-        return new Object[][] {{" Avocado  Green ", new Fruit("Avocado", Color.green)},
-                {"Peach RED", new Fruit("Peach", Color.red)},};
+        return new Object[][] {{" Avocado  Green ", new Fruit("Avocado", Color.GREEN)},
+                {"Peach RED", new Fruit("Peach", Color.RED)},};
     }
     @Test(dataProvider = "dataFruits")
     public void testInput(String input, Fruit expected) throws IOException, FruitException {

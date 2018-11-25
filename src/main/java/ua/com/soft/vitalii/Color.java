@@ -2,12 +2,17 @@ package ua.com.soft.vitalii;
 
 /*thanks http://www.nutritionaustralia.org/national/resource/eat-rainbow*/
 public enum Color{
-    red,
-    purple,
-    blue,
-    orange,
-    yellow,
-    green,
-    brown,
-    white;
+    RED,
+    PURPLE,
+    BLUE,
+    ORANGE,
+    YELLOW,
+    GREEN,
+    BROWN,
+    WHITE;
+
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }

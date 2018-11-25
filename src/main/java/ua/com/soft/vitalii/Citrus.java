@@ -19,7 +19,7 @@ public class Citrus extends Fruit {
     public void input(BufferedReader br) throws IOException {
         String[] input = br.readLine().trim().split("\\s+");
         setName(input[0]);
-        setColor(Color.valueOf(input[1].toLowerCase()));
+        setColor(Color.valueOf(input[1].toUpperCase()));
         setContainsViataminC(Double.parseDouble(input[2]));
     }
 

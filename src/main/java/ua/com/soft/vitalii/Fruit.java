@@ -21,7 +21,7 @@ public class Fruit {
         String[] input = br.readLine().trim().split("\\s+");
         if (input.length == 2) {
             setName(input[0]);
-            setColor(Color.valueOf(input[1].toLowerCase()));
+            setColor(Color.valueOf(input[1].toUpperCase()));
         } else throw new FruitException("Wrong input");
     }
 

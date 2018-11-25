@@ -1,9 +1,10 @@
 package ua.com.soft.vitalii;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -33,23 +34,49 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter writerToConsole = new BufferedWriter(new OutputStreamWriter(System.out));
-        Charset charset = Charset.forName("UTF-8");
-        Scanner scanner = new Scanner(System.in);
-        Fruit fruit = Factory.get(scanner);
-        System.out.println(fruit.getColor());
-        fruit.print(writerToConsole);
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        final String whatToDo = "Enter fruit name, color, content of vitamin C - optionally for citrus fruits.";
+        System.out.println(whatToDo);
 
-//        final String README = "Enter the name of the fruit, color, optionally for citrus fruits - the content of vitamin C.";
-//        System.out.println(README);
+        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+        List<Fruit> fruits = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Fruit fruit = new Citrus();
+            boolean waitingForData = true;
+            while (waitingForData) try {
+                fruit.input(consoleReader);
+                waitingForData = false;
+            } catch (FruitException e) {
+                e.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                StringBuilder message = new StringBuilder("You should choose from colors:\n");
+                for (Color color : Color.values()) {
+                    message.append(color);
+                    message.append(' ');
+                }
+                System.err.println(message);
+            } catch (NumberFormatException e) {
+                System.err.println("You should enter decimal number with dot");
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Fruits entered");
 
-//        List<ua.com.soft.vitalii.Fruit> fruits = new LinkedList<ua.com.soft.vitalii.Fruit>();
-//        fruits.add(new ua.com.soft.vitalii.Fruit("Apple", ua.com.soft.vitalii.Color.yellow));
-//        fruits.add(new ua.com.soft.vitalii.Citrus("Lemon", ua.com.soft.vitalii.Color.yellow, 45));
-//        fruits.add(new ua.com.soft.vitalii.Citrus("Lime", ua.com.soft.vitalii.Color.green, 35));
-//        fruits.add(new ua.com.soft.vitalii.Citrus("Grapefruit", ua.com.soft.vitalii.Color.red, 50));
-//
+        try (BufferedWriter consoleWriter = new BufferedWriter(new OutputStreamWriter(System.out))) {
+            for (Fruit fruit : fruits) {
+                fruit.print(consoleWriter);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
 //        System.out.println(fruits);
 //        try (BufferedWriter writerToFile = Files.newBufferedWriter(Paths.get("fruits.txt"), charset)) {
 //            for (int i = 0; i < 2; i++) {
@@ -67,13 +94,6 @@ public class Main {
 //        } catch (ua.com.soft.vitalii.FruitException e) {
 //            e.printStackTrace();
 //        }
-//        try (BufferedWriter writerToConsole = new BufferedWriter(new OutputStreamWriter(System.out))) {
-//            for (ua.com.soft.vitalii.Fruit fruit : fruits) {
-//                fruit.print(writerToConsole);
-//            }
-//        } catch (IOException x) {
-//            System.err.format("IOException: %s%n", x);
-//        }
 
 //        try {
 //            ua.com.soft.vitalii.XMLTools.save(fruits);
@@ -89,19 +109,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //
-//        System.out.println(fruits2);
-//        ua.com.soft.vitalii.Fruit fruitApple = new ua.com.soft.vitalii.Fruit();
-//        fruitApple.input("apple.txt");
-//        fruits.add(fruitApple);
 
-//
-//        System.out.println(ua.com.soft.vitalii.Tools.getByColor(fruits, ua.com.soft.vitalii.Color.red));
-//        ua.com.soft.vitalii.Tools.sortByName(fruits);
-//
-//        for (ua.com.soft.vitalii.Fruit fruit : fruits) {
-//            fruit.print("fruits.txt");
-//            fruit.print();
-//        }
-
+//        Charset charset = Charset.forName("UTF-8");
     }
 }

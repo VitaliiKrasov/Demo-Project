@@ -25,6 +25,7 @@ public class XMLTools {
     public static List<Fruit> read() throws IOException {
         FileInputStream fis = new FileInputStream(file);
         XMLDecoder decoder = new XMLDecoder(fis);
+
         List<Fruit> result = (List<Fruit>) decoder.readObject();
         decoder.close();
         fis.close();

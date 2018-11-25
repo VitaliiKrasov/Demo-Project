@@ -12,9 +12,9 @@ import static org.testng.Assert.assertEquals;
 public class CitrusTest {
     @DataProvider(name = "dataCitruses")
     public static Object[][] createData() {
-        return new Object[][] {{"Orangelo yellow 40", new Citrus("Orangelo", Color.yellow, 40)},
-                {"  Clementine  orange 48.8", new Citrus("Clementine", Color.orange, 48.8)},
-                {"Tangerine red 26.7", new Citrus("Tangerine", Color.red, 26.7)}};
+        return new Object[][] {{"Orangelo yellow 40", new Citrus("Orangelo", Color.YELLOW, 40)},
+                {"  Clementine  orange 48.8", new Citrus("Clementine", Color.ORANGE, 48.8)},
+                {"Tangerine red 26.7", new Citrus("Tangerine", Color.RED, 26.7)}};
     }
     @Test(dataProvider = "dataCitruses")
     public void testInput(String input, Fruit expected) throws IOException, FruitException {
