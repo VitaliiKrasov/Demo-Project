@@ -12,6 +12,7 @@ public enum Orchard {
     Blueberies(new Fruit("Blueberies", Color.BLUE)),
     Grapefruit(new Citrus("Grapefruit", Color.RED, 31.2)),
     Lemon(new Citrus("Lemon", Color.YELLOW, 53)),
+    Lime(new Citrus("Lime", Color.GREEN, 29.1)),
     Orange(new Citrus("Orange", Color.ORANGE, 53.2)),
     Clementine(new Citrus("Clementine", Color.ORANGE, 48.8)),
     Tangerine(new Citrus("Tangerine", Color.RED, 26.7)),

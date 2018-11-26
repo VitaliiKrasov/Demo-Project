@@ -1,8 +1,11 @@
-package ua.com.soft.vitalii;
+package ua.com.soft.vitalii.tools;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.com.soft.vitalii.Citrus;
+import ua.com.soft.vitalii.Color;
+import ua.com.soft.vitalii.Fruit;
 import ua.com.soft.vitalii.tools.XMLTools;
 
 import java.io.File;

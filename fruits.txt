@@ -1,0 +1,5 @@
+class Fruit, name Bananas, color white
+class Fruit, name Gala, color red
+class Fruit, name Gala, color red
+class Citrus, name Lemon, color yellow, contains 53.0mg vitamin C
+class Citrus, name Lime, color green, contains 29.1mg vitamin C

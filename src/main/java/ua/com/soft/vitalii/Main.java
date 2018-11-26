@@ -95,7 +95,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Fruits are serialized to list_fruits.xml");
 
         List<Fruit> fruits2 = new ArrayList<>();
 
@@ -104,7 +103,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Fruits are serialized to list_fruits.xml");
-        System.out.println(fruits2);
     }
 }

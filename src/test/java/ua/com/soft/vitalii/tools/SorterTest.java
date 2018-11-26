@@ -1,7 +1,10 @@
-package ua.com.soft.vitalii;//import main.ua.com.soft.vitalii.Citrus;
+package ua.com.soft.vitalii.tools;//import main.ua.com.soft.vitalii.Citrus;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.com.soft.vitalii.Citrus;
+import ua.com.soft.vitalii.Color;
+import ua.com.soft.vitalii.Fruit;
 
 import java.util.LinkedList;
 import java.util.List;
