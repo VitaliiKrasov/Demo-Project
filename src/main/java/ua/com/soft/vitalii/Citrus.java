@@ -1,8 +1,13 @@
 package ua.com.soft.vitalii;
 
+import ua.com.soft.vitalii.exceptions.ColorException;
+import ua.com.soft.vitalii.exceptions.UnknownFruitException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Objects;
+
+import static ua.com.soft.vitalii.tools.Cutter.getArgs;
 
 public class Citrus extends Fruit {
     private double containsViataminC;
@@ -16,20 +21,24 @@ public class Citrus extends Fruit {
     }
 
     @Override
-    public void input(BufferedReader br) throws IOException {
-        String[] input = br.readLine().trim().split("\\s+");
-        setName(input[0]);
-        setColor(Color.valueOf(input[1].toUpperCase()));
-        setContainsViataminC(Double.parseDouble(input[2]));
-    }
-
-    public void setContainsViataminC(double containsViataminC) {
-        this.containsViataminC = containsViataminC;
+    public void input(BufferedReader br) throws IOException, ColorException, UnknownFruitException {
+        String line = br.readLine().trim();
+        String[] args = getArgs(line);
+        if (args.length > 3) {
+            setName(args[1]);
+            try {
+                Color color = Color.valueOf(args[2].toUpperCase());
+                setColor(color);
+                setContainsViataminC(Double.parseDouble(args[3]));
+            } catch (IllegalArgumentException e) {
+                throw new ColorException();
+            }
+        } else throw new UnknownFruitException("Wrong input data for fruit");
     }
 
     @Override
     public String toString() {
-        return String.format("name = '%s', color = '%s', contains vitamin C = %2f milligramms", getName(), getColor(), containsViataminC);
+        return String.format("%s, contains %.1fmg vitamin C", super.toString(), containsViataminC);
     }
 
     @Override
@@ -44,6 +53,10 @@ public class Citrus extends Fruit {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), containsViataminC);
+    }
+
+    public void setContainsViataminC(double containsViataminC) {
+        this.containsViataminC = containsViataminC;
     }
 
     public double getContainsViataminC() {

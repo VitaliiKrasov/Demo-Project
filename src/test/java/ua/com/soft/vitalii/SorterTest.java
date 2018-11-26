@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
-import static ua.com.soft.vitalii.Tools.getByColor;
-import static ua.com.soft.vitalii.Tools.sortByName;
+import static ua.com.soft.vitalii.tools.Sorter.getByColor;
+import static ua.com.soft.vitalii.tools.Sorter.sortByName;
 
-public class ToolsTest {
+public class SorterTest {
     @BeforeMethod
     static List getTestList() {
         List<Fruit> fruits = new LinkedList<Fruit>();
@@ -35,6 +35,7 @@ public class ToolsTest {
 //        assert
         assertEquals(actual, expected);
     }
+
     @Test
     public void testSortByName() {
 //        arrange

@@ -1,4 +1,6 @@
-package ua.com.soft.vitalii;
+package ua.com.soft.vitalii.tools;
+
+import ua.com.soft.vitalii.Fruit;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -22,7 +24,7 @@ public class XMLTools {
         fos.close();
     }
 
-    public static List<Fruit> read() throws IOException {
+    public static List<Fruit> extract() throws IOException {
         FileInputStream fis = new FileInputStream(file);
         XMLDecoder decoder = new XMLDecoder(fis);
 

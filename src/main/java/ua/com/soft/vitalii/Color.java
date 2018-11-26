@@ -1,7 +1,7 @@
 package ua.com.soft.vitalii;
 
 /*thanks http://www.nutritionaustralia.org/national/resource/eat-rainbow*/
-public enum Color{
+public enum Color {
     RED,
     PURPLE,
     BLUE,

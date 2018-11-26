@@ -1,11 +1,19 @@
 package ua.com.soft.vitalii;
 
+import ua.com.soft.vitalii.exceptions.ColorException;
+import ua.com.soft.vitalii.exceptions.UnknownFruitException;
+
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+
+import static ua.com.soft.vitalii.tools.Sorter.getByColor;
+import static ua.com.soft.vitalii.tools.Sorter.sortByName;
+import static ua.com.soft.vitalii.tools.XMLTools.extract;
+import static ua.com.soft.vitalii.tools.XMLTools.save;
 
 /**
  * + 1) Утворити клас Фрукт, який містить:
@@ -19,42 +27,37 @@ import java.util.Scanner;
  * + 2) Утворити похідний від нього клас Цитрус, який має:
  * + поле - вміст вітаміну С в грамах,
  * + конструктор з параметрами,
- * + ? властивість,
+ * + властивість,
  * + перевизначені методи input() та print().
  * <p>
  * + 3) Утворити List фруктів і додати до нього 5 різних фруктів і цитрусів.
  * + Видрукувати дані про ті фрукти, колір яких є 'жовтий'.
  * + Посортувати список фруктів за назвою і
  * +     результат вивести у файл
- * - Передбачити перехоплення виняткових ситуацій
+ * + Передбачити перехоплення виняткових ситуацій
  * + Сериалізувати-десериалізувати список у Xml форматі
- * - Написати юніт-тести на методи класів
+ * + Написати юніт-тести на методи класів
  */
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        final String whatToDo = "Enter fruit name, color, content of vitamin C - optionally for citrus fruits.";
-        System.out.println(whatToDo);
+    public static void main(String[] args) {
+        final String whatToDo = "Enter fruit data: class, name, color, content of vitamin C - optionally for citrus fruits.";
 
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
         List<Fruit> fruits = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Fruit fruit = new Citrus();
+            System.out.println(whatToDo);
             boolean waitingForData = true;
             while (waitingForData) try {
-                fruit.input(consoleReader);
+                Fruit fruit = Factory.get(consoleReader);
+                fruits.add(fruit);
                 waitingForData = false;
-            } catch (FruitException e) {
+                System.out.println(fruit.toString() + " added to list\n");
+            } catch (UnknownFruitException e) {
                 e.printStackTrace();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ColorException e) {
                 e.printStackTrace();
-                StringBuilder message = new StringBuilder("You should choose from colors:\n");
-                for (Color color : Color.values()) {
-                    message.append(color);
-                    message.append(' ');
-                }
-                System.err.println(message);
             } catch (NumberFormatException e) {
                 System.err.println("You should enter decimal number with dot");
                 e.printStackTrace();
@@ -64,52 +67,44 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Fruits entered");
+        System.out.println(fruits.size() + " fruits entered\n");
 
+        List<Fruit> yellowFruit = getByColor(fruits, Color.YELLOW);
+        System.out.println(yellowFruit.size() + " fruits are yellow");
         try (BufferedWriter consoleWriter = new BufferedWriter(new OutputStreamWriter(System.out))) {
-            for (Fruit fruit : fruits) {
+            for (Fruit fruit : yellowFruit) {
                 fruit.print(consoleWriter);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        sortByName(fruits);
+        Charset charset = Charset.forName("UTF-8");
+        try (BufferedWriter writerToFile = Files.newBufferedWriter(Paths.get("fruits.txt"), charset)) {
+            for (Fruit fruit : fruits) {
+                fruit.print(writerToFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
+        try {
+            save(fruits);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Fruits are serialized to list_fruits.xml");
 
-//        System.out.println(fruits);
-//        try (BufferedWriter writerToFile = Files.newBufferedWriter(Paths.get("fruits.txt"), charset)) {
-//            for (int i = 0; i < 2; i++) {
-//                ua.com.soft.vitalii.Fruit fruit = new ua.com.soft.vitalii.Citrus();
-//                System.out.println(readMe);
-//                fruit.input(reader);
-//                fruits.add(fruit);
-//            }
-//
-//            for (ua.com.soft.vitalii.Fruit fruit : fruits) {
-//                fruit.print(writerToFile);
-//            }
-//        } catch (IOException x) {
-//            System.err.format("IOException: %s%n", x);
-//        } catch (ua.com.soft.vitalii.FruitException e) {
-//            e.printStackTrace();
-//        }
+        List<Fruit> fruits2 = new ArrayList<>();
 
-//        try {
-//            ua.com.soft.vitalii.XMLTools.save(fruits);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        List<ua.com.soft.vitalii.Fruit> fruits2 = new ArrayList<>();
-//
-//        try {
-//            fruits2.addAll(ua.com.soft.vitalii.XMLTools.read());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-
-//        Charset charset = Charset.forName("UTF-8");
+        try {
+            fruits2.addAll(extract());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Fruits are serialized to list_fruits.xml");
+        System.out.println(fruits2);
     }
 }

@@ -3,6 +3,7 @@ package ua.com.soft.vitalii;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.com.soft.vitalii.tools.XMLTools;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class XMLToolsTest {
         List<Fruit> actual = new ArrayList<Fruit>();
 
         try {
-            actual.addAll(XMLTools.read());
+            actual.addAll(XMLTools.extract());
         } catch (IOException e) {
             e.printStackTrace();
         }

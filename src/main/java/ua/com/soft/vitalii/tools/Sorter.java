@@ -1,13 +1,16 @@
-package ua.com.soft.vitalii;
+package ua.com.soft.vitalii.tools;
+
+import ua.com.soft.vitalii.Color;
+import ua.com.soft.vitalii.Fruit;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Tools {
+public class Sorter {
 
-    public static List<Fruit> getByColor (List<Fruit> fruits, Color color) {
+    public static List<Fruit> getByColor(List<Fruit> fruits, Color color) {
         List<Fruit> result = new LinkedList<Fruit>();
         for (Fruit fruit : fruits) {
             if (fruit.getColor() == color) {
@@ -17,7 +20,7 @@ public class Tools {
         return result;
     }
 
-    public static void sortByName (List<Fruit> fruits) {
+    public static void sortByName(List<Fruit> fruits) {
         Collections.sort(fruits, new FruitNameComparator());
     }
 

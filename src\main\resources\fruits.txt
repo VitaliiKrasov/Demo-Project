@@ -1,0 +1,5 @@
+class Fruit, name Kiwi, color green
+class Fruit, name Kiwi, color green
+class Fruit, name Kiwi, color green
+class Fruit, name Kiwi, color green
+class Citrus, name Lemon, color yellow, contains 53.0mg vitamin C

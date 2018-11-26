@@ -1,9 +1,14 @@
 package ua.com.soft.vitalii;
 
+import ua.com.soft.vitalii.exceptions.ColorException;
+import ua.com.soft.vitalii.exceptions.UnknownFruitException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Objects;
+
+import static ua.com.soft.vitalii.tools.Cutter.getArgs;
 
 public class Fruit {
     private String name;
@@ -17,12 +22,18 @@ public class Fruit {
     public Fruit() {
     }
 
-    public void input(BufferedReader br) throws IOException, FruitException {
-        String[] input = br.readLine().trim().split("\\s+");
-        if (input.length == 2) {
-            setName(input[0]);
-            setColor(Color.valueOf(input[1].toUpperCase()));
-        } else throw new FruitException("Wrong input");
+    public void input(BufferedReader br) throws IOException, ColorException, UnknownFruitException {
+        String line = br.readLine().trim();
+        String[] args = getArgs(line);
+        if (args.length > 2) {
+            setName(args[1]);
+            try {
+                Color color = Color.valueOf(args[2].toUpperCase());
+                setColor(color);
+            } catch (IllegalArgumentException e) {
+                throw new ColorException();
+            }
+        } else throw new UnknownFruitException("Wrong input data for fruit");
     }
 
     public void print(BufferedWriter bw) throws IOException {
@@ -49,7 +60,9 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return String.format("name='%s', color=%s", name, color);
+        return String.format("%s, name %s, color %s",
+                this.getClass().toString().replaceAll("ua.com.soft.vitalii.", ""),
+                name, color);
     }
 
     @Override
