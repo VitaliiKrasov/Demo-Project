@@ -18,7 +18,6 @@ public class Factory {
                 throw new UnknownFruitException("The name of the fruit is not in list");
             }
         }
-        br.reset();
 
         boolean isFruit = line.contains("Fruit");
         boolean isCitrus = line.contains("Citrus");
@@ -29,6 +28,7 @@ public class Factory {
         } else if (isCitrus) {
             result = new Citrus();
         } else throw new UnknownFruitException("Fruit class is not defined");
+        br.reset();
         result.input(br);
         if (result == null) throw new UnknownFruitException("null");
         return result;
