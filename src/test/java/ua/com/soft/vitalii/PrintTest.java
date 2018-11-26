@@ -1,13 +1,13 @@
 package ua.com.soft.vitalii;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.StringWriter;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class PrintTest {
     @DataProvider(name = "dataPrint")
