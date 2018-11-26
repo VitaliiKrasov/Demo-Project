@@ -89,7 +89,6 @@ public class Main {
             e.printStackTrace();
         }
 
-
         try {
             save(fruits);
         } catch (IOException e) {
