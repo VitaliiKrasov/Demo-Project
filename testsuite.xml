@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="6" >
+    <test name="Nopackage" >
+        <classes>
+            <class name="ua.com.soft.vitalii.OrchardTest"/>
+        </classes>
+    </test>
+</suite>
